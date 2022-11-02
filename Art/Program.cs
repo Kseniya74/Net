@@ -11,12 +11,12 @@ namespace Art
     {
         public String Name { get; set; }
         public DateTime CreationDate { get; set; }
-        public float Price { get; set; }
+        public double Price { get; set; }
         private bool IsExhibited = true;
         private bool IsExisting = true;
         private string Answer = "yes";
 
-        public Painting(string name, DateTime creationDate, float price)
+        public Painting(string name, DateTime creationDate, double price)
         {
             Name = name;
             CreationDate = creationDate;
@@ -47,7 +47,7 @@ namespace Art
         {
             ExistingWarning();
             ExhibitedWarning();
-            Console.WriteLine($"This is a painting called {Name} in cost {Price} created at {CreationDate}");
+            Console.WriteLine($"\nThis is a painting called {Name} in cost {Price} created at {CreationDate}");
         }
     }
 
@@ -80,7 +80,7 @@ namespace Art
         public override void GenreInfo()
         {
             base.GenreInfo();
-            Console.WriteLine($"This is a genre called {Name} about {Description}");
+            Console.WriteLine($"This is a genre called {Name}: '{Description}'\n");
         }
     }
 
@@ -96,23 +96,7 @@ namespace Art
         public override void GenreInfo()
         {
             base.GenreInfo();
-            Console.WriteLine($"This is a genre called {Name} about {Description}");
-        }
-    }
-
-    public class History : Genre
-    {
-        public History(string name, string description)
-            : base(name, description)
-        {
-            Name = name;
-            Description = description;
-        }
-
-        public override void GenreInfo()
-        {
-            base.GenreInfo();
-            Console.WriteLine($"This is a genre called {Name} about {Description}");
+            Console.WriteLine($"This is a genre called {Name}: '{Description}'\n");
         }
     }
 
@@ -128,7 +112,23 @@ namespace Art
         public override void GenreInfo()
         {
             base.GenreInfo();
-            Console.WriteLine($"This is a genre called {Name} about {Description}");
+            Console.WriteLine($"This is a genre called {Name}: '{Description}'\n");
+        }
+    }
+
+    public class Expressionism : Genre
+    {
+        public Expressionism(string name, string description)
+            : base(name, description)
+        {
+            Name = name;
+            Description = description;
+        }
+
+        public override void GenreInfo()
+        {
+            base.GenreInfo();
+            Console.WriteLine($"This is a genre called {Name}: '{Description}\n'");
         }
     }
 
@@ -144,7 +144,7 @@ namespace Art
         public override void GenreInfo()
         {
             base.GenreInfo();
-            Console.WriteLine($"This is a genre called {Name} about {Description}");
+            Console.WriteLine($"This is a genre called {Name}: '{Description}'\n");
         }
     }
 
@@ -163,7 +163,7 @@ namespace Art
 
         public void PainterInfo()
         {
-            Console.WriteLine($"Painter {Surname} {Name} was born in {Country}");
+            Console.WriteLine($"\nPainter {Surname} {Name} was born in {Country}");
         }
     }
 
@@ -182,7 +182,7 @@ namespace Art
 
         public void HallInfo()
         {
-            Console.WriteLine($"{Name} hall height is {Height}, width {Width}");
+            Console.WriteLine($"\n{Name} hall height is {Height}, width {Width}");
         }
     }
 
@@ -191,17 +191,24 @@ namespace Art
     {
         static void Main(string[] args)
         {
-            Genre Landscape = new Landscape("Landscape", "Description");
-            Genre Portrait = new Portrait("Portrait", "");
-            Genre History = new History("History", "");
-            Genre Impressionism = new Impressionism("Impressionism", "");
-            Genre Seascape = new Seascape("Seascape", "");
+            String name = "'Vetka'";
+            DateTime creationDate = new DateTime(1840, 07, 17);
+            double price = 1000.7;
+
+            Genre Landscape = new Landscape("Landscape", "Depiction of natural scenery, especially where the main subject is a wide view");
+            Genre Portrait = new Portrait("Portrait", "Representation of a particular person");
+            Genre Impressionism = new Impressionism("Impressionism", "Not a finished painting");
+            Genre Expressionism = new Expressionism("Expressionism", "Image of reality is distorted in order to make it expressive of the artist's inner feelings or ideas");
+            Genre Seascape = new Seascape("Seascape", "A view of the sea");
+            Painting painting = new Painting(name, creationDate, price);
 
             Landscape.GenreInfo();
             Portrait.GenreInfo();
-            History.GenreInfo();
             Impressionism.GenreInfo();
+            Expressionism.GenreInfo();
             Seascape.GenreInfo();
+
+            painting.PaintingInfo();
 
             Console.ReadKey();
         }
